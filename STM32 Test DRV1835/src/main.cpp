@@ -8,7 +8,8 @@ DigitalOut STEP(D7);
 DigitalOut Dir(D8);
 DigitalIn btn(D12);
 DigitalOut LED(LED3);
-
+int MaxTurn = 800;
+int StepDelay = 1000;
 void StepMode(int mode);
 
 int main()
@@ -25,17 +26,17 @@ int main()
         {
             LED=1;
             Dir = 0;
-            for (j = 0; j <= 200; j++)
+            for (j = 0; j <= MaxTurn; j++)
             {
                 STEP=1;
-                wait_us(20);
+                wait_us(StepDelay);
                 STEP=0;
             }
             Dir = 1;
-            for (j = 0; j <= 200; j++)
+            for (j = 0; j <= MaxTurn; j++)
             {
                 STEP=1;
-                wait_us(200);
+                wait_us(StepDelay);
                 STEP=0;
             }
             mode = mode * 2;
