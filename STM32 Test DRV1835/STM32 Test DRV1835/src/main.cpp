@@ -8,7 +8,7 @@ DigitalOut STEP(D7);
 DigitalOut Dir(D8);
 DigitalIn btn(D12);
 DigitalOut LED(LED3);
-int MaxTurn = 800;
+int MaxTurn = 200;
 int StepDelay = 500;
 void Set_StepMode(int mode);
 
