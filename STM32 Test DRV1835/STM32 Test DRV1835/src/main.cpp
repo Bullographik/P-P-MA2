@@ -9,41 +9,46 @@ DigitalOut Dir(D8);
 DigitalIn btn(D12);
 DigitalOut LED(LED3);
 int MaxTurn = 800;
-int StepDelay = 1000;
-void StepMode(int mode);
+int StepDelay = 500;
+void Set_StepMode(int mode);
 
 int main()
 {
     int i, j;
-
+Enable_=1;
     while (1)
     {
         if(btn == 1)
         {
         int mode = 1;
-        Enable_=1;
+        Enable_=0;
         for (i = 0; i <= 8; i++)
         {
+            wait(3);
             LED=1;
             Dir = 0;
+            Set_StepMode(mode);
             for (j = 0; j <= MaxTurn; j++)
             {
                 STEP=1;
                 wait_us(StepDelay);
                 STEP=0;
+                wait_us(StepDelay);
             }
             Dir = 1;
+            wait_ms(500);
             for (j = 0; j <= MaxTurn; j++)
             {
                 STEP=1;
                 wait_us(StepDelay);
                 STEP=0;
+                wait_us(StepDelay);
             }
             mode = mode * 2;
             LED=0;
-            wait(3);
+            
         }
-        Enable_=0;
+        Enable_=1;
         LED=0;
         }
 
