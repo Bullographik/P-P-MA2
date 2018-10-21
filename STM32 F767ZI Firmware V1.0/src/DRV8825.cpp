@@ -8,6 +8,7 @@ DRV8825::DRV8825(PinName Enable, PinName M0, PinName M1, PinName M2, PinName STE
     _M0 = 0;
     _M1 = 0;
     _M2 = 0;
+    
 }
 
 //***********************************************************************************
@@ -22,10 +23,10 @@ void DRV8825::setDestination(int numStep, int resolution, int direction, int ste
         _stepDelay = stepDelay;
 }
 
-void DRV8825::setResolution(int _resolution)
+void DRV8825::setResolution(int resolution)
 {
 
-    switch (_resolution)
+    switch (resolution)
     {
     case 1:
         _M0 = 0;

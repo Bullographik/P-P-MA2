@@ -7,7 +7,7 @@
 class DRV8825
 {
   public:
-  //************************************************************************************************************//
+    //************************************************************************************************************//
     /* Initialisation of stepper motor controler.
     * @param pin Enable = Enable Pin of the DRV8825
     * @param pin M0 = M0 Pin of the DRV8825
@@ -19,8 +19,7 @@ class DRV8825
     */
     DRV8825(PinName Enable, PinName M0, PinName M1, PinName M2, PinName STEP, PinName DIR, int minStepDelay);
 
-
-//************************************************************************************************************//
+    //************************************************************************************************************//
     /* Set the number of step you want to do with the resolution define
     *@param numStep = number of step you want to do with the resolution you input. 
                 Ex: 3200 step at a resolution of 32 is equal de 1000 step with a resolution of 1 
@@ -30,22 +29,28 @@ class DRV8825
     * 
     */
     void setDestination(int numStep, int resolution, int direction, int stepDelay);
-//************************************************************************************************************//
+    //************************************************************************************************************//
     /*To use in order to update the driver at each loop of the main
     * currentMillis is time in milli-seconds you have with the main timer 
     */
     void update(int currentMillis);
-//************************************************************************************************************//
-    void setResolution(int _resolution);
+    //************************************************************************************************************//
+    // return true if the is not fisnihed
+    bool moveComplete();
+
+    //************************************************************************************************************//
+    // Set the step resolution of the DRV8825
+    void setResolution(int resolution);
+    //************************************************************************************************************//
+
   private:
     DigitalOut _Enable, _M0, _M1, _M2, _STEP, _DIR;
     int _minStepDelay;
     int _numStep;
-    int _millis;
-
-
-
+    int _stepDelay;
+    int _Lastmillis;
     
+
     void doStep();
 };
 
