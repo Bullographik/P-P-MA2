@@ -8,7 +8,6 @@ DRV8825::DRV8825(PinName Enable, PinName M0, PinName M1, PinName M2, PinName STE
     _M0 = 0;
     _M1 = 0;
     _M2 = 0;
-    
 }
 
 //***********************************************************************************
@@ -61,16 +60,19 @@ void DRV8825::setResolution(int resolution)
     }
 }
 //************************************************************************************
-void DRV8825::update(int currentMillis){
-if(currentMillis>=_Lastmillis+_stepDelay){
-    doStep();
-    _numStep--;
-    _Lastmillis=currentMillis;
-}
+void DRV8825::update(int currentMillis)
+{
+    if (currentMillis >= _Lastmillis + _stepDelay)
+    {
+        doStep();
+        _numStep--;
+        _Lastmillis = currentMillis;
+    }
 }
 
-void DRV8825::doStep(){
-_STEP= !_STEP;
+void DRV8825::doStep()
+{
+    _STEP = !_STEP;
 }
 
 //************************************************************************************

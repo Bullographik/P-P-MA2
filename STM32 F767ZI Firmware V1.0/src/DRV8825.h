@@ -1,3 +1,12 @@
+/****************************************************************************************************************************
+*****************************************************************************************************************************
+Library orginaly design for the Pick and Place project at HelMo Gramme By Nicolas Rixhon - rixhon.nicolas@live.com
+This library is subject to evolve this is an Alpha version
+
+
+
+DRV8825 library V a0.1
+*/
 
 #ifndef MBED_DRV8825_H
 #define MBED_DRV8825_H
