@@ -3,10 +3,18 @@
 Library orginaly design for the Pick and Place project at HelMo Gramme By Nicolas Rixhon - rixhon.nicolas@live.com
 This library is subject to evolve this is an Alpha version
 
+This library is design to control stepper motor with the DRV8825. It can be easily adapt to other controller.
+
+Changelog :
+
+Year            Version                               Change
+
+2018            DRV8825 library V a0.1                Creation of the library
 
 
-DRV8825 library V a0.1
-*/
+Actual version : DRV8825 library V a0.1 
+********************************************************************************************************************************
+********************************************************************************************************************************/
 
 #ifndef MBED_DRV8825_H
 #define MBED_DRV8825_H
@@ -34,13 +42,13 @@ class DRV8825
                 Ex: 3200 step at a resolution of 32 is equal de 1000 step with a resolution of 1 
     *@param resolution = (1,2,4,8,16,32) it's equal to the step fraction you want to apply
     *@param direction = (0,1) it's direction you want to move
-    *@param stepDelay = delay between step you want
+    *@param stepDelay = delay between step you want µs
     * 
     */
     void setDestination(int numStep, int resolution, int direction, int stepDelay);
     //************************************************************************************************************//
     /*To use in order to update the driver at each loop of the main
-    * currentMillis is time in milli-seconds you have with the main timer 
+    * currentMillis is time in µ second you have with the main timer 
     */
     void update(int currentMillis);
     //************************************************************************************************************//
