@@ -31,7 +31,11 @@ int main()
     float X = 0;
     float Y = 0;
     float mvmtX, mvmtY;
-    btn.start();
+    int xDIR,yDIR;
+
+
+
+    btn.start(); //Start the debounce timer for the buttons
     pc.baud(11520);
 #ifdef JOY
     Joy.start();
@@ -46,7 +50,7 @@ int main()
 
         if (btnManCtrl.read() == 1 && btn.read() >= 1) // Toggle Manual flag when btnToggle is on
         {
-            btn.reset();
+            btn.reset(); // Restet the debounce timer
             manMode = !manMode;
             ledManCtrl=0;
             if (manMode)
@@ -57,11 +61,13 @@ int main()
 #ifdef DEBUG
         pc.printf("Time 1 is = %d \n", LedTimer.read_ms());
 #endif
-        if (LedTimertgl == false) // Start the timer if not.
+        if (LedTimertgl == false) // Start the Led timer if not.
         {
             LedTimer.start();
             LedTimertgl = true;
         }
+
+
         /****************************************         Manual Control          *****************************************************/
 
         if (manMode == true)
@@ -85,29 +91,50 @@ int main()
                 wait_ms(500);
 #endif
             }
-            X = 0.5 - round(Xx.read() * 10000) / 10000;
-            Y = 0.52 - round(Yy.read() * 10000) / 10000;
-            mvmtX = (1 - abs(X) * 2) * (MaxStepDelay);
-            if (mvmtX < 800)
-                mvmtX = 500;
-            if (abs(X) <= 0.01)
+            X = 0.5 - round(Xx.read() * 10000) / 10000; // Stabilize the data from the ADC
+            Y = 0.52 - round(Yy.read() * 10000) / 10000; // Same
+            mvmtX = (1 - abs(X) * 2) * (MaxStepDelay); // Calcul the Tps between each step
+            if (mvmtX < 800) // If delay <800µs set to 500µs
+                mvmtX = MinStepDelay;
+            if (abs(X) <= 0.01)// Manage a stable 0
             {
                 mvmtX = 0;
             }
-            mvmtY = (1 - abs(Y) * 2) * (MaxStepDelay);
+            mvmtY = (1 - abs(Y) * 2) * (MaxStepDelay); // Same as before
             if (mvmtY < 800)
-                mvmtY = 500;
-            if (abs(Y) <= 0.05)
+                mvmtY = MinStepDelay;
+            if (abs(Y) <= 0.01)
             {
                 mvmtY = 0;
             }
-#ifdef JOY
-            if (Joy.read_ms() > 100)
+
+
+            if(X>0) // Manage the direction sent to the Driver
             {
-                pc.printf(" x = %f       y = %f \n", mvmtX, mvmtY);
-                Joy.reset();
+                xDIR=0;
+            }
+            else
+            {
+                xDIR=1;
+            }
+            if(Y>0)
+            {
+                yDIR=0;
+            }
+            else
+            {
+                yDIR=1;
             }
 
+            // Resolution manage when you push on the joy button
+            if()
+
+            #ifdef JOY
+            if (Joy.read_ms() > 100)
+            {
+                pc.printf(" x = %f xDIR=%d       y = %f  yDIR=%d \n", mvmtX,xDIR ,mvmtY, yDIR);
+                Joy.reset();
+            }
 #endif
         }
         //else{}
