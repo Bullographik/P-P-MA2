@@ -50,7 +50,7 @@ class DRV8825
     /*To use in order to update the driver at each loop of the main
     * currentMillis is time in µ second you have with the main timer 
     */
-    void update(int currentMillis);
+    void update(unsigned long currentMillis);
     //************************************************************************************************************//
     // return true if the is not fisnihed
     bool moveComplete();
@@ -59,14 +59,20 @@ class DRV8825
     // Set the step resolution of the DRV8825
     void setResolution(int resolution);
     //************************************************************************************************************//
-
+    //Enable the motor to move : 0 to move, 1 to stop
+    void enable(int en);
+    void freeMove(unsigned long currentMillis, int StepDelay, int direction);
+    int stepToGo();
   private:
     DigitalOut _Enable, _M0, _M1, _M2, _STEP, _DIR;
     int _minStepDelay;
     int _numStep;
     int _stepDelay;
-    int _Lastmillis;
-    
+    unsigned long _Lastmillis;
+    unsigned long _LastmillisStepCtrl;
+    int _previousStepDelay;
+    int _maxDtStep;
+     int StepDelay_;
 
     void doStep();
 };

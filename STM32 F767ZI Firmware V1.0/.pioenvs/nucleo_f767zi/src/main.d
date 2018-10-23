@@ -201,4 +201,5 @@
  C:\users\rixho\.platformio\packages\framework-mbed/platform/mbed_stats.h \
  C:\users\rixho\.platformio\packages\framework-mbed/platform/Callback.h \
  C:\users\rixho\.platformio\packages\framework-mbed/platform/FunctionPointer.h \
- C:\users\rixho\.platformio\packages\framework-mbed/platform/ScopedLock.h
+ C:\users\rixho\.platformio\packages\framework-mbed/platform/ScopedLock.h \
+ src/DRV8825.h
